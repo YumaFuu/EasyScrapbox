@@ -15,8 +15,37 @@ limitations under the License.
 */
 package main
 
-import "github.com/YumaFuu/scbo/cmd"
+import (
+	"fmt"
+	"os"
+
+	"github.com/spf13/cobra"
+)
+
+var (
+	title, body, project string
+)
 
 func main() {
-	cmd.Execute()
+	rootCmd := &cobra.Command{
+		Use:   "scbo",
+		Short: "you can easily create new scrapbox",
+		Long:  "you can easily create new scrapbox",
+		Run: func(c *cobra.Command, args []string) {
+			fmt.Printf("Project: ")
+			fmt.Scan(&project)
+			fmt.Printf("Title: ")
+			fmt.Scan(&title)
+			fmt.Printf("Body: ")
+			fmt.Scan(&body)
+
+			url := "https://scrapbox.io/" + project + "/" + title + "?body=" + body
+			fmt.Println(url)
+		},
+	}
+
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
