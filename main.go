@@ -41,7 +41,8 @@ func main() {
 	rootCmd := &cobra.Command{
 		Use:   "scbo",
 		Short: "you can easily create new scrapbox",
-		Long:  "you can easily create new scrapbox",
+		Long: `you can easily create new scrapbox
+						on cli`,
 		Run: func(c *cobra.Command, args []string) {
 			var project string
 			var n int
